@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Videogames DB</string>
+    <string name="delete_message">Juego eliminado correctamente</string>
+</resources>
