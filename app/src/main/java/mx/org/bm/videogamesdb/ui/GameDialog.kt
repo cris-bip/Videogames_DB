@@ -50,16 +50,17 @@ class GameDialog(
 
         binding.apply {
             tietTitle.setText(game.title)
-            tietGenre.setText(game.genre)
             tietDeveloper.setText(game.developer)
             genreSpinner.setSelection(game.genreId)
         }
+
+        val array: Array<String> = resources.getStringArray(R.array.genre_opts)
 
         dialog = if(isNewGame){
             buildDialog("Guardar", "Cancelar", {
                 // Guardar
                 game.title = binding.tietTitle.text.toString()
-                game.genre = binding.tietGenre.text.toString()
+                game.genre = array[binding.genreSpinner.selectedItemPosition]
                 game.developer = binding.tietDeveloper.text.toString()
                 game.genreId = binding.genreSpinner.selectedItemPosition
 
@@ -84,7 +85,7 @@ class GameDialog(
             buildDialog("Actualizar", "Borrar", {
                 // Update
                 game.title = binding.tietTitle.text.toString()
-                game.genre = binding.tietGenre.text.toString()
+                game.genre = array[binding.genreSpinner.selectedItemPosition]
                 game.developer = binding.tietDeveloper.text.toString()
                 game.genreId = binding.genreSpinner.selectedItemPosition
 
@@ -170,18 +171,6 @@ class GameDialog(
             }
         })
 
-        binding.tietGenre.addTextChangedListener(object: TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                saveButton?.isEnabled = validateFields()
-            }
-        })
-
         binding.tietDeveloper.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -196,7 +185,7 @@ class GameDialog(
     }
 
     private fun validateFields(): Boolean{
-        return (binding.tietTitle.text.toString().isNotEmpty() && binding.tietGenre.text.toString().isNotEmpty() && binding.tietDeveloper.text.toString().isNotEmpty())
+        return (binding.tietTitle.text.toString().isNotEmpty() && binding.tietDeveloper.text.toString().isNotEmpty())
     }
 
     private fun buildDialog(btn1Text: String, btn2Text:String,

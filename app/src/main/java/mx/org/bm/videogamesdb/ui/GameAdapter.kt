@@ -32,17 +32,18 @@ class GameAdapter(private  val onGameClick: (GameEntity) -> Unit): RecyclerView.
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(games[position])
+        val game = games[position]
+        holder.bind(game)
 
         holder.itemView.setOnClickListener {
-            onGameClick(games[position])
+            onGameClick(game)
         }
 
         holder.ivIcon.setOnClickListener {
 
         }
 
-        holder.ivIcon.setImageResource(getIconWithGenreId(games[position].genreId))
+        holder.ivIcon.setImageResource(getIconWithGenreId(game.genreId))
     }
 
     private fun getIconWithGenreId(genreId: Int): Int{
