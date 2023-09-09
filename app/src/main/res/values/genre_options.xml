@@ -3,8 +3,6 @@
     <string-array name="genre_opts">
         <item>SHOOTER</item>
         <item>FIGHTING</item>
-        <item>HORROR</item>
-        <item>ADVENTURE</item>
         <item>STRATEGY</item>
         <item>MUSICAL</item>
         <item>SPORT</item>

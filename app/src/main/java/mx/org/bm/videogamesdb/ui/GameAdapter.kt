@@ -3,6 +3,7 @@ package mx.org.bm.videogamesdb.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import mx.org.bm.videogamesdb.R
 import mx.org.bm.videogamesdb.data.db.model.GameEntity
 import mx.org.bm.videogamesdb.databinding.GameElementBinding
 
@@ -40,7 +41,22 @@ class GameAdapter(private  val onGameClick: (GameEntity) -> Unit): RecyclerView.
         holder.ivIcon.setOnClickListener {
 
         }
+
+        holder.ivIcon.setImageResource(getIconWithGenreId(games[position].genreId))
     }
+
+    private fun getIconWithGenreId(genreId: Int): Int{
+        return when (genreId){
+            0 -> R.drawable.shooter_icon
+            1 -> R.drawable.fighting_icon
+            2 -> R.drawable.strategy_icon
+            4 -> R.drawable.music_icon
+            5 -> R.drawable.sports_icon
+            6 -> R.drawable.racing_icon
+            else -> R.drawable.no_genre_icon
+        }
+    }
+
 
     fun updateList(list: List<GameEntity>){
         games = list
