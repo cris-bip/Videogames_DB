@@ -51,9 +51,9 @@ class GameAdapter(private  val onGameClick: (GameEntity) -> Unit): RecyclerView.
             0 -> R.drawable.shooter_icon
             1 -> R.drawable.fighting_icon
             2 -> R.drawable.strategy_icon
-            4 -> R.drawable.music_icon
-            5 -> R.drawable.sports_icon
-            6 -> R.drawable.racing_icon
+            3 -> R.drawable.music_icon
+            4 -> R.drawable.sports_icon
+            5 -> R.drawable.racing_icon
             else -> R.drawable.no_genre_icon
         }
     }

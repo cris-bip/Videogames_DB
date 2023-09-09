@@ -157,7 +157,7 @@ class GameDialog(
 
         val alertDialog = dialog as AlertDialog
         saveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
-        saveButton?.isEnabled = false
+        saveButton?.isEnabled = validateFields()
 
         binding.tietTitle.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
