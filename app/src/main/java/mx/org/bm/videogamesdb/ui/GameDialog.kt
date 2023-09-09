@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class GameDialog(
         genreId = 0,
         developer = ""
     ), private  val updateUI: () -> Unit,
-    private  val message: (String) -> Unit
+    private  val message: (Int) -> Unit
 ): DialogFragment() {
 
     private var _binding: GameDialogBinding? = null
@@ -68,12 +69,12 @@ class GameDialog(
 
                     }
 
-                    message("Juego guardado correctamente")
+                    message(R.string.save_message)
                     //Toast.makeText(requireContext(), "Juego guardado correctamente", Toast.LENGTH_LONG).show()
 
                     updateUI()
                 }catch(e: IOException){
-                    message("Error al guardar el juego")
+                    //message("Error al guardar el juego")
                     //Toast.makeText(requireContext(), "Error al guardar el juego", Toast.LENGTH_LONG).show()
                 }
             }, {
@@ -92,13 +93,13 @@ class GameDialog(
                         repository.updateGame(game)
                     }
 
-                    message("Juego actualizado correctamente")
+                    message(R.string.update_message)
                     //Toast.makeText(requireContext(), "Juego actualizado correctamente", Toast.LENGTH_LONG).show()
 
                     updateUI()
                 }catch(e: IOException){
-                    message("Error al actualizar el juego")
-                    //Toast.makeText(requireContext(), "Error al actualizar el juego", Toast.LENGTH_LONG).show()
+                    //message("Error al actualizar el juego")
+                    Toast.makeText(requireContext(), "Error al actualizar el juego", Toast.LENGTH_LONG).show()
                 }
 
             }, {
@@ -113,12 +114,12 @@ class GameDialog(
                                 repository.deleteGame(game)
                             }
 
-                            message("Juego eliminado correctamente")
+                            message(R.string.delete_message)
                             //Toast.makeText(requireContext(), "Juego eliminado correctamente", Toast.LENGTH_LONG).show()
 
                             updateUI()
                         }catch(e: IOException){
-                            message("Error al eliminar el juego")
+                            //message("Error al eliminar el juego")
                             //Toast.makeText(requireContext(), "Error al eliminar el juego", Toast.LENGTH_LONG).show()
                         }
                     }.setNegativeButton("Cancelar"){dialog, _ ->

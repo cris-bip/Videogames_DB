@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Videogames DB</string>
+    <string name="save_message">Juego creado correctamente</string>
     <string name="delete_message">Juego eliminado correctamente</string>
+    <string name="update_message">Juego actualizado correctamente</string>
 </resources>

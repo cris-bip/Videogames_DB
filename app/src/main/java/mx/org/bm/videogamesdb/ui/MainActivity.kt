@@ -63,8 +63,8 @@ class MainActivity : AppCompatActivity() {
     fun click(view: View) {
         val dialog = GameDialog( updateUI = {
             updateUI()
-        }, message = {text ->
-            message(text)
+        }, message = {id ->
+            message(id)
         })
 
         dialog.show(supportFragmentManager, "dialog")
@@ -74,15 +74,15 @@ class MainActivity : AppCompatActivity() {
          //Toast.makeText(this, "Click en el juego ${game.title}", Toast.LENGTH_LONG).show()
         val dialog = GameDialog(isNewGame = false, game = game, updateUI = {
             updateUI()
-        }, message = {text ->
-           message(text)
+        }, message = {id ->
+           message(id)
         })
 
         dialog.show(supportFragmentManager, "dialog")
     }
 
-    private fun message(text: String){
-        Snackbar.make(binding.cl, text, Snackbar.LENGTH_SHORT)
+    private fun message(id: Int){
+        Snackbar.make(binding.cl, getString(id), Snackbar.LENGTH_SHORT)
             .setTextColor(Color.parseColor("#FFFFFF"))
             .setBackgroundTint(Color.parseColor("#9E1734"))
             .show()
