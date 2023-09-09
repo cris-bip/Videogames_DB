@@ -9,7 +9,7 @@ import mx.org.bm.videogamesdb.util.Constants
 
 @Database(
     entities = [GameEntity::class],
-    version = 1,    // Versión de la bd, requerido para migraciones (auto-migrations)
+    version = 2,    // Versión de la bd, requerido para migraciones (auto-migrations)
     exportSchema = true // Por defecto es true
 )
 

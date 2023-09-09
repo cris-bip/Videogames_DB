@@ -17,6 +17,9 @@ data class GameEntity(
     @ColumnInfo(name = "game_genre")
     var genre: String,
 
+    @ColumnInfo(name = "game_genre_id")
+    var genreId: Int,
+
     @ColumnInfo(name = "game_developer")
     var developer: String
 )

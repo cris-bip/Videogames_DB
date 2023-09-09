@@ -2,15 +2,13 @@ package mx.org.bm.videogamesdb.ui
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Update
 import kotlinx.coroutines.launch
 import mx.org.bm.videogamesdb.R
 import mx.org.bm.videogamesdb.application.VideogamesDBApp
@@ -24,6 +22,7 @@ class GameDialog(
     private  var game:GameEntity = GameEntity(
         title = "",
         genre = "",
+        genreId = 0,
         developer = ""
     ), private  val updateUI: () -> Unit,
     private  val message: (String) -> Unit
@@ -46,18 +45,22 @@ class GameDialog(
 
         builder = AlertDialog.Builder(requireContext())
 
+        setupSpinnerOptions()
+
         binding.apply {
             tietTitle.setText(game.title)
             tietGenre.setText(game.genre)
             tietDeveloper.setText(game.developer)
+            genreSpinner.setSelection(game.genreId)
         }
 
         dialog = if(isNewGame){
-            buidDialog("Guardar", "Cancelar", {
+            buildDialog("Guardar", "Cancelar", {
                 // Guardar
                 game.title = binding.tietTitle.text.toString()
                 game.genre = binding.tietGenre.text.toString()
                 game.developer = binding.tietDeveloper.text.toString()
+                game.genreId = binding.genreSpinner.selectedItemPosition
 
                 try{
                     lifecycleScope.launch {
@@ -77,11 +80,12 @@ class GameDialog(
                 // Cancelar
             })
         }else{
-            buidDialog("Actualizar", "Borrar", {
+            buildDialog("Actualizar", "Borrar", {
                 // Update
                 game.title = binding.tietTitle.text.toString()
                 game.genre = binding.tietGenre.text.toString()
                 game.developer = binding.tietDeveloper.text.toString()
+                game.genreId = binding.genreSpinner.selectedItemPosition
 
                 try{
                     lifecycleScope.launch {
@@ -127,6 +131,18 @@ class GameDialog(
         }
 
         return dialog
+    }
+
+    private fun setupSpinnerOptions(){
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.genre_opts,
+            android.R.layout.simple_spinner_item
+        ).also {adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            binding.genreSpinner.adapter = adapter
+        }
     }
 
     override fun onDestroy() {
@@ -182,7 +198,8 @@ class GameDialog(
         return (binding.tietTitle.text.toString().isNotEmpty() && binding.tietGenre.text.toString().isNotEmpty() && binding.tietDeveloper.text.toString().isNotEmpty())
     }
 
-    private fun buidDialog(btn1Text: String, btn2Text:String, positiveButton: () -> Unit, negativeButton: () -> Unit): Dialog =
+    private fun buildDialog(btn1Text: String, btn2Text:String,
+                            positiveButton: () -> Unit, negativeButton: () -> Unit): Dialog =
         builder.setView(binding.root)
             .setTitle("Juego")
             .setPositiveButton(btn1Text){dialog, _ ->
