@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="Header"
+        android:contentDescription="@string/header_desc"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/header" />
 
@@ -23,7 +23,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:hint="Título"
+        android:hint="@string/title_hint"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -52,7 +52,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:hint="Desarrollador"
+        android:hint="@string/dev_hint"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -79,7 +79,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            android:hint="Género"
+            android:hint="@string/genre_hint"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -87,7 +87,7 @@
             app:boxCornerRadiusTopStart="16dp">
 
             <TextView
-                android:text="Género:"
+                android:text="@string/genre_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <Spinner

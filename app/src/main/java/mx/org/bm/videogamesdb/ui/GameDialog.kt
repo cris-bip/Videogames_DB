@@ -7,7 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -57,7 +56,7 @@ class GameDialog(
         val array: Array<String> = resources.getStringArray(R.array.genre_opts)
 
         dialog = if(isNewGame){
-            buildDialog("Guardar", "Cancelar", {
+            buildDialog(getString(R.string.save_title), getString(R.string.cancel_title), {
                 // Guardar
                 game.title = binding.tietTitle.text.toString()
                 game.genre = array[binding.genreSpinner.selectedItemPosition]
@@ -71,18 +70,16 @@ class GameDialog(
                     }
 
                     message(R.string.save_message)
-                    //Toast.makeText(requireContext(), "Juego guardado correctamente", Toast.LENGTH_LONG).show()
 
                     updateUI()
                 }catch(e: IOException){
-                    //message("Error al guardar el juego")
-                    //Toast.makeText(requireContext(), "Error al guardar el juego", Toast.LENGTH_LONG).show()
+                    message(R.string.save_error_message)
                 }
             }, {
                 // Cancelar
             })
         }else{
-            buildDialog("Actualizar", "Borrar", {
+            buildDialog(getString(R.string.update_title), getString(R.string.delete_title), {
                 // Update
                 game.title = binding.tietTitle.text.toString()
                 game.genre = array[binding.genreSpinner.selectedItemPosition]
@@ -95,35 +92,30 @@ class GameDialog(
                     }
 
                     message(R.string.update_message)
-                    //Toast.makeText(requireContext(), "Juego actualizado correctamente", Toast.LENGTH_LONG).show()
 
                     updateUI()
                 }catch(e: IOException){
-                    //message("Error al actualizar el juego")
-                    Toast.makeText(requireContext(), "Error al actualizar el juego", Toast.LENGTH_LONG).show()
+                    message(R.string.update_error_message)
                 }
 
             }, {
                 // Delete
-
                 AlertDialog.Builder(requireContext())
-                    .setTitle("Confirmación")
-                    .setMessage("¿Seguro de borrar el juego ${game.title}?")
-                    .setPositiveButton("Aceptar"){_,_ ->
+                    .setTitle(getString(R.string.confirm_title))
+                    .setMessage(getString(R.string.confirm_message, game.title))
+                    .setPositiveButton(getString(R.string.acept_title)){ _, _ ->
                         try{
                             lifecycleScope.launch {
                                 repository.deleteGame(game)
                             }
 
                             message(R.string.delete_message)
-                            //Toast.makeText(requireContext(), "Juego eliminado correctamente", Toast.LENGTH_LONG).show()
 
                             updateUI()
                         }catch(e: IOException){
-                            //message("Error al eliminar el juego")
-                            //Toast.makeText(requireContext(), "Error al eliminar el juego", Toast.LENGTH_LONG).show()
+                            message(R.string.delete_error_message)
                         }
-                    }.setNegativeButton("Cancelar"){dialog, _ ->
+                    }.setNegativeButton(getString(R.string.cancel_title)){dialog, _ ->
                         dialog.dismiss()
                     }.create()
                     .show()
@@ -191,7 +183,7 @@ class GameDialog(
     private fun buildDialog(btn1Text: String, btn2Text:String,
                             positiveButton: () -> Unit, negativeButton: () -> Unit): Dialog =
         builder.setView(binding.root)
-            .setTitle("Juego")
+            .setTitle(getString(R.string.game_title))
             .setPositiveButton(btn1Text){dialog, _ ->
                 positiveButton()
             }

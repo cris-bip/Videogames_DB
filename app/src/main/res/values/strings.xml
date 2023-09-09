@@ -3,4 +3,23 @@
     <string name="save_message">Juego creado correctamente</string>
     <string name="delete_message">Juego eliminado correctamente</string>
     <string name="update_message">Juego actualizado correctamente</string>
+    <string name="add_element">Agregrar elemento</string>
+    <string name="whitout_items">¡No hay registros!</string>
+    <string name="header_desc">Header</string>
+    <string name="title_hint">Título</string>
+    <string name="dev_hint">Desarrollador</string>
+    <string name="genre_hint">Género</string>
+    <string name="genre_text">Género:</string>
+    <string name="save_title">Guardar</string>
+    <string name="cancel_title">Cancelar</string>
+    <string name="update_title">Actualizar</string>
+    <string name="delete_title">Borrar</string>
+    <string name="update_error_message">Error al actualizar el juego</string>
+    <string name="delete_error_message">Error al eliminar el juego</string>
+    <string name="save_error_message">Error al guardar el juego</string>
+    <string name="confirm_title">Confirmación</string>
+    <string name="acept_title">Aceptar</string>
+    <string name="game_title">Juego</string>
+
+    <string name="confirm_message">¿Seguro que deseas borrar el juego %s?</string>
 </resources>
